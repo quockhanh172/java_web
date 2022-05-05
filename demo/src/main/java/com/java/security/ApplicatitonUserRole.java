@@ -1,17 +1,18 @@
 package com.java.security;
 
-import java.util.Collection;
+import static com.java.security.ApplicationUserPermission.COURSE_READ;
+import static com.java.security.ApplicationUserPermission.COURSE_WRITE;
+import static com.java.security.ApplicationUserPermission.STUDENT_READ;
+import static com.java.security.ApplicationUserPermission.STUDENT_WRITE;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.google.common.collect.Sets;
 
 import lombok.RequiredArgsConstructor;
-
-import static com.java.security.ApplicationUserPermission.*;
 @RequiredArgsConstructor
 public enum ApplicatitonUserRole {
 	STUDENT(Sets.newHashSet()),

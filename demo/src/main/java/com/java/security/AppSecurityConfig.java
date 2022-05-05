@@ -5,6 +5,8 @@ import static com.java.security.ApplicatitonUserRole.ADMIN;
 import static com.java.security.ApplicatitonUserRole.ADMINTRAINEE;
 import static com.java.security.ApplicatitonUserRole.STUDENT;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -40,7 +42,19 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 				.anyRequest()
 				.authenticated()
 				.and()
-				.httpBasic();
+				.formLogin()
+				.loginPage("/login").permitAll().defaultSuccessUrl("/course",true)
+				.and()
+				.rememberMe()
+					.tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+					.key("somethingverysecure")
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.clearAuthentication(true)
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID","remember-me")
+				.logoutSuccessUrl("/login");
 	}
 	
 	@Override
