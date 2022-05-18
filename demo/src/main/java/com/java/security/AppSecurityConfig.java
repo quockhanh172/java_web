@@ -1,5 +1,6 @@
 package com.java.security;
 
+import static com.java.security.ApplicationUserPermission.COURSE_READ;
 import static com.java.security.ApplicationUserPermission.COURSE_WRITE;
 import static com.java.security.ApplicatitonUserRole.ADMIN;
 import static com.java.security.ApplicatitonUserRole.ADMINTRAINEE;
@@ -34,11 +35,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 				.csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/","/index","/css/*").permitAll()
-				.antMatchers("/api/**").hasRole(STUDENT.name())
+				.antMatchers("/api/**").hasRole(ADMIN.name())
 				.antMatchers(HttpMethod.DELETE,"/managerment/api/**").hasAuthority(COURSE_WRITE.getPermission()) 
 				.antMatchers(HttpMethod.POST,"/managerment/api/**").hasAuthority(COURSE_WRITE.getPermission())
 				.antMatchers(HttpMethod.PUT,"/managerment/api/**").hasAuthority(COURSE_WRITE.getPermission())
-				.antMatchers(HttpMethod.GET,"/managerment/api/**").hasAnyRole(ADMIN.name(),ADMINTRAINEE.name())
+				.antMatchers(HttpMethod.GET,"/managerment/api/**").hasAuthority(COURSE_READ.getPermission())
 				.anyRequest()
 				.authenticated()
 				.and()
