@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 
 @SpringBootApplication
-@ComponentScan({"com.java.controller","com.java.security"})
+@ComponentScan({"com.java.controller","com.java.security","com.java.auth"})
 public class JavawebApplication {
 
 	public static void main(String[] args) {
