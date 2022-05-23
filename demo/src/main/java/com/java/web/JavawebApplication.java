@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScans;
 public class JavawebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavawebApplication.class, args);
+		SpringApplication.run(JavawebApplication.class, args);	
 	}
 
 }

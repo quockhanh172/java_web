@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 public class ApplicationUserService implements UserDetailsService {
 
@@ -18,11 +20,11 @@ public class ApplicationUserService implements UserDetailsService {
 		this.applicationUserDao = applicationUserDao;
 	}
 
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		return applicationUserDao.selectApplicationUserByUsername(username).orElseThrow(()-> new UsernameNotFoundException(String.format("Username %s not found", username)));
+		return applicationUserDao.selecUserByUsername(username)
+				.orElseThrow(()->new UsernameNotFoundException(String.format("username %s not found", username)));
 	}
 
 }

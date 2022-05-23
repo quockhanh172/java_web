@@ -1,12 +1,13 @@
 package com.java.auth;
 
-import static com.java.security.ApplicatitonUserRole.STUDENT;
 import static com.java.security.ApplicatitonUserRole.ADMIN;
+import static com.java.security.ApplicatitonUserRole.STUDENT;
 import static com.java.security.ApplicatitonUserRole.ADMINTRAINEE;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -16,18 +17,18 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Repository("fake")
-public class FakeApplicationUserDao implements ApplicationUserDao {
-	
+public class FakeApplicationUserDaoService implements ApplicationUserDao {
 	private final PasswordEncoder passwordEncoder;
 
 	@Override
-	public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
+	public Optional<ApplicationUser> selecUserByUsername(String username) {
 		// TODO Auto-generated method stub
-		return getApplicationUsers().stream().filter(applicationUser-> username.equals(applicationUser.getUsername())).findFirst();
+		return getApplicationUsers().stream().filter(user-> username.equals(user.getUsername())).findFirst();
 	}
 	
-	private List<ApplicationUser> getApplicationUsers(){
-		List<ApplicationUser> applicationUsers = Lists.newArrayList(
+	
+	public List<ApplicationUser> getApplicationUsers(){
+		List<ApplicationUser> users = Lists.newArrayList(
 				new ApplicationUser(STUDENT.getGrantedAuthoritiers(), 
 									passwordEncoder.encode("password"), 
 									"khanh", 
@@ -51,7 +52,8 @@ public class FakeApplicationUserDao implements ApplicationUserDao {
 						true, 
 						true, 
 						true)
-		);
-		return applicationUsers;
+				
+				);
+		return users;
 	}
 }
